@@ -42,7 +42,7 @@
                     <td>{{ item.denominacion }}</td>
                     <td>{{ item.almacen }}</td>
                     <td>
-                        <button onclick="retirar({{ item.id }})" class="btn btn-info" id="retirar" value="{{ items.id }}">Retirar</button>
+                        <button onclick="retirar({{ item.id }})" class="btn btn-info" id="retirar">Retirar</button>
                         <button onclick="editar()" class="btn btn-warning" id="editar">Editar</button>
                         <button onclick="eliminar()"class="btn btn-danger" id="eliminar">Eliminar</button>
                     </td>
@@ -98,20 +98,19 @@
 
     <script>
 
-        function retirar(item) {
+        function retirar(item_id) {
 
-            alertify.prompt( 'Almacen ICPNA', 'Ingrese Monto a Retirar', '0', 
+            alertify.prompt('Almacen ICPNA', 'Ingrese Monto a Retirar', '0', 
                 function(evt, value) { 
 
                     var monto = value;
                     console.log(monto);
-                    console.log(item);
-
+                    console.log(item_id);
 
                     if(monto > 100){
 
                         alertify.alert('Almacenes ICPNA', 'El monto ingresado es Incorrecto!', function(){});
-                        alertify.error('Operacion Cancelada!')
+                        alertify.error('Operacion Cancelada!');
                         }
 
                     else{
@@ -119,15 +118,15 @@
                             alertify.confirm('Almacenes ICPNA','Seguro que deseas Retirar : <b>' + monto + '</b>', 
                                 function(){ 
 
-                                    //location.href ="{% url 'main:home' %}"
+                                    location.hrfe = "{% url 'main:retiro' item_id='item_id' monto='monto' %}";
 
-                                    $(document).ready(function() {
+/*                                    $(document).ready(function() {
                                         var refreshId =  setInterval( function(){
                                             $('#table_items').load("{% url 'main:home' %}");//actualizar tabla
                                         }, 1000 );
-                                    });
+                                    });*/
 
-                                    alertify.success('Retiraste: ' + value) 
+                                    alertify.success('Retiraste: ' + value); 
 
                                 }, function(){ alertify.error('Operacion Cancelada!')});
                         }

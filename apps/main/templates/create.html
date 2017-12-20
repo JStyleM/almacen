@@ -1,24 +1,61 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
+    <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     {% load static from staticfiles %}
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
-    <title>Registrar Item</title>
 </head>
-
 <body>
-    <form method="POST">
-        {{ form.nombre }}
-        {{ form.cantidad }}
-        {{ form.denominacion }}
-        {{ form.almacen }}
 
-        <input type="submit" value="Enviar">
-    </form>
+<form method="POST">
+    {% csrf_token %}
+<div style="width:500px; margin-top: 30px;" class="container">
+    <div class="panel panel-default">
+        <div class="panel-body form-horizontal payment-form">
+            <div class="form-group">
+            <label for="concept" class="col-sm-3 control-label">Nombre</label>
+                <div class="col-sm-9">
+                    {{ form.nombre }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-3 control-label">Cantidad</label>
+                <div class="col-sm-9">
+                    {{ form.cantidad }}
+                </div>
+            </div> 
+            <div class="form-group">
+                <label for="status" class="col-sm-3 control-label">Denominacion</label>
+                <div class="col-sm-9">
+                    {{ form.denominacion }}
+                </div>
+            </div>
+                <div class="form-group">
+                <label for="status" class="col-sm-3 control-label">Almacen</label>
+                <div class="col-sm-9">
+                    {{ form.almacen }}
+                </div>
+            </div> 
+                    <!-- <div class="form-group">
+                        <label for="date" class="col-sm-3 control-label">Date</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="date" name="date">
+                        </div>
+                    </div> -->   
+            <div class="form-group">
+                <div class="col-sm-12 text-center">
+                    <input type="submit" class="btn btn-success" value="Registrar">
+                    <a class="btn btn-info" href="{% url 'main:home' %}">Volver</a>
+                    <!--    <span class="glyphicon glyphicon-plus"></span> Add
+                    </button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
 </body>
 </html>
-
-

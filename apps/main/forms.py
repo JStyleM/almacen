@@ -9,14 +9,20 @@ class ItemForm(forms.ModelForm):
 		widgets = {
 			'nombre' : forms.TextInput(attrs={
 				'type' : 'text',
-				'placeholder' : 'Username'
+				'placeholder' : 'Nombre',
+				'class' : 'form-control'
 				}),
 			'cantidad' : forms.TextInput(attrs={
-				'type' : 'email',
-				'placeholder' : 'Email'
+				'type' : 'number',
+				'placeholder' : '0',
+				'class' : 'form-control'
 				}),
-			'denominacion' : forms.Select(),
-			'get_almacen' : forms.Select()
+			'denominacion' : forms.Select(attrs={
+				'class' : 'form-control'
+				}),
+			'almacen' : forms.Select(attrs={
+				'class' : 'form-control'
+				})
 		}
 
 	

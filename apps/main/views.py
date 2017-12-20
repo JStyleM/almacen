@@ -28,4 +28,4 @@ class CreateItem(CreateView):
 	model = Item
 	form_class = ItemForm
 	template_name = 'create.html'
-	sucess_url = reverse_lazy('main:home')
+	success_url = reverse_lazy('main:crear')

@@ -42,7 +42,7 @@
                     <td>{{ item.denominacion }}</td>
                     <td>{{ item.almacen }}</td>
                     <td>
-                        
+                        {% csrf_token %}
                         <button onclick="retirar({{ item.id }})" class="btn btn-info" id="retirar">Retirar</button>
                         <button onclick="editar()" class="btn btn-warning" id="editar">Editar</button>
                         <button onclick="eliminar()"class="btn btn-danger" id="eliminar">Eliminar</button>
@@ -118,11 +118,8 @@
 
                             alertify.confirm('Almacenes ICPNA','Seguro que deseas Retirar : <b>' + monto + '</b>', 
                                 function(){ 
-                                    url = "{% url 'main:home' %}?item_id=" + item_id + "&monto=" + monto;
-                                    console.log(url);
-                                    location.href = url;
 
-                                   
+                                    location.hrfe = "{% url 'main:retiro' item_id='item_id' monto='monto' %}";
 
 /*                                    $(document).ready(function() {
                                         var refreshId =  setInterval( function(){

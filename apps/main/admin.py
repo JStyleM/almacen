@@ -6,10 +6,10 @@ from .models import Almacen, Item
 
 @admin.register(Almacen)
 class AlmacenAdmin(admin.ModelAdmin):
-	list_display = ('__unicode__', 'piso')
+	list_display = ('__str__', 'piso')
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-	list_display = ('__unicode__', 'almacen_name', 'cantidad', 'denominacion')
+	list_display = ('__str__', 'almacen', 'cantidad', 'denominacion')
 
 

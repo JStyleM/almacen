@@ -7,7 +7,7 @@ class Almacen(models.Model):
 	nombre = models.CharField(max_length=100)
 	piso  = models.IntegerField()
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.nombre
 
 
@@ -18,8 +18,6 @@ class Item(models.Model):
 	denominacion = models.CharField(max_length=100)
 	almacen = models.ForeignKey(Almacen, on_delete=models.CASCADE)
 
-	def __unicode__(self):
-		return self.nombre
-
-	def almacen_name(self):
+	def __str__(self):
 		return self.almacen.nombre
+   

@@ -1,7 +1,8 @@
 from django.conf.urls import url
-from . import views
+from .views import home, item_update, CreateItem
 
 urlpatterns = [
-	url(r'^$', views.home, name='home'),
-    #url(r'^$', views.item_update, name='retiro'),
+	url(r'^$', home, name='home'),
+    url(r'^retirar$', item_update, name='retiro'),
+    url(r'^create$', CreateItem.as_view(), name='crear'),
 ]

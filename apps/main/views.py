@@ -1,15 +1,15 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from django.core.urlresolvers import reverse_lazy, reverse
-from .models import Item
+from .models import Item, Movimientos
 from .forms import ItemForm
 
 
 # Create your views here.
 
 def home(request):	
-	query = Item.objects.all()
-	return render(request, 'index.html', {'query':query})
+	query = Movimientos.objects.all()
+	return render(request, 'movimientos.html', {'query':query})
 
 def item_update(request):
 	if request.method == 'GET':

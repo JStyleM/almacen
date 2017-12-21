@@ -5,14 +5,14 @@ class ItemForm(forms.ModelForm):
 
 	class Meta:
 		model = Item
-		fields = ('nombre', 'cantidad', 'denominacion', 'almacen')
+		fields = ('nombre', 'stock', 'denominacion', 'almacen')
 		widgets = {
 			'nombre' : forms.TextInput(attrs={
 				'type' : 'text',
 				'placeholder' : 'Nombre',
 				'class' : 'form-control'
 				}),
-			'cantidad' : forms.TextInput(attrs={
+			'stock' : forms.TextInput(attrs={
 				'type' : 'number',
 				'placeholder' : '0',
 				'class' : 'form-control'

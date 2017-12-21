@@ -24,30 +24,35 @@
 
 <body>
 
-    <div class="ibox-content">
+    <div class="ibox-content"> 
+        <h1 class="text-center">Sistema Almacen ICPNA</h1>
+        <div class="text-center">
+            <a class="btn btn-success " href="{% url 'main:crear' %}">Nuevo Registro</a>
+        </div>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover dataTables-example" id="table_items">
                 <thead>
                     <th>Nombre</th>
+                    <th>Tipo</th>
                     <th>Cantidad</th>
-                    <th>Denominacion</th>
-                    <th>Almacen</th>
-                    <th>Acciones</th>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
                 </thead>
                 <tbody>
                     {% for item in query %}
                     <tr class="gradeX">
                     <td>{{ item.nombre }}</td>
+                    <td>{{ item.tipo }}</td>
                     <td>{{ item.cantidad }}</td>
-                    <td>{{ item.denominacion }}</td>
-                    <td>{{ item.almacen }}</td>
-                    <td>
-                        {% csrf_token %}
-                        <button onclick="retirar({{ item.id }})" class="btn btn-info" id="retirar">Retirar</button>
+                    <td>{{ item.fecha }}</td>
+                    <td>{{ item.usuario }}</td>
+                    <!-- <td>
+                        
+                        <button onclick="retirar({{ item.id }}, {{ item.cantidad }})" class="btn btn-info" id="retirar">Retirar</button>
                         <button onclick="editar()" class="btn btn-warning" id="editar">Editar</button>
                         <button onclick="eliminar()"class="btn btn-danger" id="eliminar">Eliminar</button>
                     </td>
-                    </tr>
+                    </tr> -->
                     {% endfor %}
                 </tbody>
             </table>                
@@ -99,7 +104,7 @@
 
     <script>
 
-        function retirar(item_id) {
+        function retirar(item_id, item_cantidad) {
 
             alertify.prompt('Almacen ICPNA', 'Ingrese Monto a Retirar', '0', 
                 function(evt, value) { 
@@ -108,7 +113,7 @@
                     console.log(monto);
                     console.log(item_id);
 
-                    if(monto > 100){
+                    if(monto > item_cantidad){
 
                         alertify.alert('Almacenes ICPNA', 'El monto ingresado es Incorrecto!', function(){});
                         alertify.error('Operacion Cancelada!');
@@ -118,16 +123,15 @@
 
                             alertify.confirm('Almacenes ICPNA','Seguro que deseas Retirar : <b>' + monto + '</b>', 
                                 function(){ 
+                                //label con la info de lo retirado
+                                alertify.success('Retiraste: ' + value);
 
-                                    location.hrfe = "{% url 'main:retiro' item_id='item_id' monto='monto' %}";
+                                //Esperamos 1 segundo para actualizar la vista con los parametros
+                                setTimeout(function(){
+                                     location.href = "{% url 'main:retiro' %}?item_id=" + item_id + "&monto=" + monto;
+                                    },1000);
 
-/*                                    $(document).ready(function() {
-                                        var refreshId =  setInterval( function(){
-                                            $('#table_items').load("{% url 'main:home' %}");//actualizar tabla
-                                        }, 1000 );
-                                    });*/
-
-                                    alertify.success('Retiraste: ' + value); 
+                                   
 
                                 }, function(){ alertify.error('Operacion Cancelada!')});
                         }

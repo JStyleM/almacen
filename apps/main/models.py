@@ -34,9 +34,15 @@ class Item(models.Model):
 
 	def __str__(self):
 		return self.nombre
+
+# class TipoMovimiento(models.Model):
+# 	nombre = models.CharField(max_length=100)
+
+# 	def __str__(self):
+# 		return self.nombre
    
 
-class Movimientos(models.Model):
+class Movimiento(models.Model):
 
 	item = models.ForeignKey(Item, on_delete=models.CASCADE)
 	tipo = models.CharField(max_length=100)

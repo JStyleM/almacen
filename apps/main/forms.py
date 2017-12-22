@@ -1,5 +1,5 @@
 from django import forms
-from .models import Item
+from .models import Item, Movimiento
 
 class ItemForm(forms.ModelForm):
 
@@ -26,4 +26,17 @@ class ItemForm(forms.ModelForm):
 		}
 
 	
+class MovimientoForm(forms.ModelForm):
 
+	class Meta:
+		model = Movimiento
+		fields = ('item', 'cantidad')
+		widgets = {
+			'item' : forms.Select(attrs={
+				'class' : 'form-control'
+				}),
+			'cantidad' : forms.TextInput(attrs={
+				'type' : 'number',
+				'class' : 'form-control'
+				})
+		}

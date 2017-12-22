@@ -27,7 +27,8 @@
     <div class="ibox-content"> 
         <h1 class="text-center">Sistema Almacen ICPNA</h1>
         <div class="text-center">
-            <a class="btn btn-success " href="{% url 'main:crear' %}">Nuevo Registro</a>
+            <a class="btn btn-success " href="{% url 'main:crear_mov' %}">Nuevo Ingreso</a>
+            <a class="btn btn-primary " href="{% url 'main:movimientos' %}">Ver Movimientos</a>
         </div>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover dataTables-example" id="table_items">
@@ -42,14 +43,14 @@
                     {% for item in query %}
                     <tr class="gradeX">
                     <td>{{ item.nombre }}</td>
-                    <td>{{ item.cantidad }}</td>
+                    <td>{{ item.stock }}</td>
                     <td>{{ item.denominacion }}</td>
                     <td><b>Piso {{ item.almacen.piso }}</b> - {{ item.almacen.nombre }}</td>
                     <td>
                         
-                        <button onclick="retirar({{ item.id }}, {{ item.cantidad }})" class="btn btn-info" id="retirar">Retirar</button>
-                        <button onclick="editar()" class="btn btn-warning" id="editar">Editar</button>
-                        <button onclick="eliminar()"class="btn btn-danger" id="eliminar">Eliminar</button>
+                        <button onclick="retirar({{ item.id }}, {{ item.cantidad }})" class="btn btn-info btn-sm" id="retirar">Retirar</button>
+                        <button onclick="editar()" class="btn btn-warning btn-sm" id="editar">Editar</button>
+                        <button onclick="eliminar()"class="btn btn-danger btn-sm" id="eliminar">Eliminar</button>
                     </td>
                     </tr>
                     {% endfor %}

@@ -12,25 +12,26 @@
 <form method="POST">
     {% csrf_token %}
 <div style="width:500px; margin-top: 30px;" class="container">
-    <h3 style="text-align: center">INGRESAR ITEM</h3>
+    
     <div class="panel panel-default">
+        <h3 style="text-align: center">REGISTRAR MOVIMIENTO</h3>
         <div class="panel-body form-horizontal payment-form">
             <div class="form-group">
             <label for="concept" class="col-sm-3 control-label">Nombre</label>
                 <div class="col-sm-9">
-                    {{ form.nombre }}
+                    {{ form.item }}<a class="btn btn-primary btn-xs" href="{% url 'main:crear_item' %}">Añadir Nuevo</a>          
                 </div>
             </div>
             <div class="form-group">
-                <label for="description" class="col-sm-3 control-label">Stock</label>
+                <label for="description" class="col-sm-3 control-label">Cantidad</label>
                 <div class="col-sm-9">
-                    {{ form.stock }}
+                    {{ form.cantidad }}
                 </div>
             </div> 
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label for="status" class="col-sm-3 control-label">Denominacion</label>
                 <div class="col-sm-9">
-                    {{ form.denominacion }}
+                    {{ form.cantidad }}
                 </div>
             </div>
                 <div class="form-group">
@@ -38,7 +39,7 @@
                 <div class="col-sm-9">
                     {{ form.almacen }}
                 </div>
-            </div> 
+            </div> -->
                     <!-- <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">

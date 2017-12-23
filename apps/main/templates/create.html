@@ -12,8 +12,8 @@
 <form method="POST">
     {% csrf_token %}
 <div style="width:500px; margin-top: 30px;" class="container">
-    <h3 style="text-align: center">INGRESAR ITEM</h3>
     <div class="panel panel-default">
+        <h3 style="text-align: center">REGISTRAR ITEM</h3>
         <div class="panel-body form-horizontal payment-form">
             <div class="form-group">
             <label for="concept" class="col-sm-3 control-label">Nombre</label>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="description" class="col-sm-3 control-label">Stock</label>
+                <label for="description" class="col-sm-3 control-label" readonly>Stock</label>
                 <div class="col-sm-9">
                     {{ form.stock }}
                 </div>
@@ -33,6 +33,12 @@
                     {{ form.denominacion }}
                 </div>
             </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-3 control-label" readonly>Remitente</label>
+                <div class="col-sm-9">
+                    {{ form.target }}
+                </div>
+            </div> 
                 <div class="form-group">
                 <label for="status" class="col-sm-3 control-label">Almacen</label>
                 <div class="col-sm-9">

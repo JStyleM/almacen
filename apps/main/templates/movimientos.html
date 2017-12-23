@@ -36,6 +36,7 @@
                     <th>Tipo</th>
                     <th>Cantidad</th>
                     <th>Almacen</th>
+                    <th>Remitente / Destino</th>
                     <th>Fecha</th>
                     <th>Usuario</th>
                 </thead>
@@ -46,6 +47,7 @@
                     <td>{{ object.tipo }}</td>
                     <td>{{ object.cantidad }} {{ object.item.denominacion }}</td>
                     <td><b>Piso {{ object.item.almacen.piso }}</b> - {{ object.item.almacen.nombre }}</td>
+                    <td>{{ object.target }}</td>
                     <td>{{ object.fecha }}</td>
                     <td>{{ object.usuario }}</td>
                     <!-- <td>

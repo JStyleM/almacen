@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Almacen, Denominacion, Remitente, Item, Movimiento
+from .models import Almacen, Denominacion, Target, Item, Movimiento
 
 # Register your models here.
 
@@ -12,8 +12,8 @@ class AlmacenAdmin(admin.ModelAdmin):
 class DenominacionAdmin(admin.ModelAdmin):
 	list_display = ('__str__',)
 
-@admin.register(Remitente)
-class RemitenteAdmin(admin.ModelAdmin):
+@admin.register(Target)
+class TargetAdmin(admin.ModelAdmin):
 	list_display = ('__str__',)
 
 @admin.register(Item)

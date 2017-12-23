@@ -19,7 +19,7 @@ class Denominacion(models.Model):
 		return self.nombre
 
 
-class Remitente(models.Model):
+class Target(models.Model):
 	nombre = models.CharField(max_length=100)
 		
 	def __str__(self):
@@ -30,16 +30,11 @@ class Item(models.Model):
 	nombre =  models.CharField(max_length=100)
 	stock = models.IntegerField()
 	denominacion = models.ForeignKey(Denominacion, on_delete=models.CASCADE)
+	target = models.ForeignKey(Target, on_delete=models.CASCADE)
 	almacen = models.ForeignKey(Almacen, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.nombre
-
-# class TipoMovimiento(models.Model):
-# 	nombre = models.CharField(max_length=100)
-
-# 	def __str__(self):
-# 		return self.nombre
    
 
 class Movimiento(models.Model):
@@ -47,6 +42,7 @@ class Movimiento(models.Model):
 	item = models.ForeignKey(Item, on_delete=models.CASCADE)
 	tipo = models.CharField(max_length=100)
 	cantidad = models.IntegerField()
+	target = models.ForeignKey(Target, on_delete=models.CASCADE)
 	fecha = models.DateTimeField(auto_now=True)
 	usuario = models.ForeignKey(User)
 

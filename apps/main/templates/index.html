@@ -26,6 +26,12 @@
 
     <div class="ibox-content"> 
         <h1 class="text-center">Sistema Almacen ICPNA</h1>
+        {% if user.is_authenticated %}
+            <div class="text-right">
+                <h4>Bienvenido/a, <b>{{ user.first_name }}<b></h4>
+                <a class="btn btn-danger btn-sm" href="{% url 'main:logout' %}">Cerrar Sesion</a>
+            </div>
+        {% endif %} 
         <div class="text-center">
             <a class="btn btn-success " href="{% url 'main:crear_item' %}">Nuevo Ingreso</a>
             <a class="btn btn-primary " href="{% url 'main:movimientos' %}">Ver Movimientos</a>
@@ -48,9 +54,9 @@
                     <td><b>Piso {{ item.almacen.piso }}</b> - {{ item.almacen.nombre }}</td>
                     <td>
                         <button onclick="añadir({{ item.id }})" class="btn btn-primary btn-xs" id="add">Añadir</button>
-                        <button onclick="retirar({{ item.id }})" class="btn btn-info btn-xs" id="retirar">Retirar</button>
-                        <button onclick="editar()" class="btn btn-warning btn-xs" id="editar">Editar</button>
-                        <button onclick="eliminar()"class="btn btn-danger btn-xs" id="eliminar">Eliminar</button>
+                        <button onclick="retirar({{ item.id }}, {{ item.stock }})" class="btn btn-info btn-xs" id="retirar">Retirar</button>
+                        <!-- <button onclick="editar()" class="btn btn-warning btn-xs" id="editar">Editar</button>
+                        <button onclick="eliminar()"class="btn btn-danger btn-xs" id="eliminar">Eliminar</button> -->
                     </td>
                     </tr>
                     {% endfor %}
@@ -104,16 +110,23 @@
 
     <script>
 
-        function retirar(item_id) {
+        function retirar(item_id, stock) {
+
+            var monto;
+            var target;
 
             alertify.prompt('Almacen ICPNA', 'Ingrese Monto a Retirar', '0', 
                 function(evt, value) { 
 
-                    var monto = value;
-                    console.log(monto);
-                    console.log(item_id);
+                    monto = parseInt(value);
+                    var item_stock = parseInt(stock);
 
-                    if(monto > item_cantidad){
+                    console.log(item_id);
+                    console.log(item_stock);
+                    console.log(monto);
+                    console.log(monto > item_stock)
+
+                    if(monto > item_stock){
 
                         alertify.alert('Almacenes ICPNA', 'El monto ingresado es Incorrecto!', function(){});
                         alertify.error('Operacion Cancelada!');
@@ -121,17 +134,29 @@
 
                     else{
 
-                            alertify.confirm('Almacenes ICPNA','Seguro que deseas Retirar : <b>' + monto + '</b>', 
+                        alertify.confirm('Almacenes ICPNA','Seguro que deseas Retirar : <b>' + monto + '</b>', 
                                 function(){ 
-                                //label con la info de lo retirado
-                                alertify.success('Retiraste: ' + value);
 
-                                //Esperamos 1 segundo para actualizar la vista con los parametros
-                                setTimeout(function(){
-                                     location.href = "{% url 'main:retiro' %}?item_id=" + item_id + "&monto=" + monto;
-                                    },1000);
+                                     alertify.prompt('Almacen ICPNA', 'Ingrese Destino', 'Ninguno',
+                                        function(evt, value) {
+                                    
+                                            target = value;
+                                            console.log(target);
 
-                                }, function(){ alertify.error('Operacion Cancelada!')});
+                                            //label con la info de lo retirado
+                                            alertify.success('Retiraste: ' + value);
+
+                                            //Esperamos 1 segundo para actualizar la vista con los parametros
+                                            setTimeout(function(){
+                                                location.href = "{% url 'main:retiro' %}?item_id=" + item_id + "&monto=" + monto + "&target=" + target;
+                                            },1000);
+
+                                      
+                                        }, function() { alertify.error('Operacion Cancelada!') }).set('type', 'text');
+
+
+                                }, function(){ alertify.error('Operacion Cancelada!')});    
+
                         }
 
                 }, function() { alertify.error('Operacion Cancelada!') }).set('type', 'number');
@@ -140,24 +165,34 @@
 
         function añadir(item_id) {
 
+            var monto;
+            var target;
+
             alertify.prompt('Almacen ICPNA', 'Ingrese Monto a Añadir', '0', 
                 function(evt, value) { 
 
-                    var monto = value;
+                    monto = value;
                     console.log(monto);
                     console.log(item_id);
 
                     alertify.confirm('Almacenes ICPNA','Seguro que deseas Añadir : <b>' + monto + '</b>', 
                         function(){ 
-                        //label con la info de lo retirado
-                        alertify.success('Añadiste: ' + value);
+                        
+                            alertify.prompt('Almacen ICPNA', 'Ingrese Remitente', 'Ninguno',
+                                    function(evt, value) {
+                                    
+                                        target = value;
+                                        console.log(target);
 
-                        //Esperamos 1 segundo para actualizar la vista con los parametros
-                        setTimeout(function(){
-                                location.href = "{% url 'main:add' %}?item_id=" + item_id + "&monto=" + monto;
-                            },1000);
+                                        //label con la info de lo retirado
+                                        alertify.success('Añadiste: ' + monto);
 
-                                   
+                                        //Esperamos 1 segundo para actualizar la vista con los parametros
+                                        setTimeout(function(){
+                                            location.href = "{% url 'main:add' %}?item_id=" + item_id + "&monto=" + monto + "&target=" + target;
+                                        },1000);
+                                      
+                                    }, function() { alertify.error('Operacion Cancelada!') }).set('type', 'text');
 
                         }, function(){ alertify.error('Operacion Cancelada!')});
                         

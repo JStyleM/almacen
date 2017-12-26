@@ -9,42 +9,26 @@
 
 </head>
 <body>
-{% csrf_token %}
 <form method="POST">
+    {% csrf_token %}
 <div style="width:500px; margin-top: 30px;" class="container">
     <div class="panel panel-default">
-        <h3 style="text-align: center">REGISTRAR ITEM</h3>
+        <h3 style="text-align: center">ALMACEN ICPNA</h3>
         <div class="panel-body form-horizontal payment-form">
             <div class="form-group">
-            <label for="concept" class="col-sm-3 control-label">Nombre</label>
+            <label for="concept" class="col-sm-3 control-label">Usuario</label>
                 <div class="col-sm-9">
-                    {{ form.nombre }}
+                    {{ form.username }}
+                    {{ form.username.errors }}
                 </div>
             </div>
             <div class="form-group">
-                <label for="description" class="col-sm-3 control-label" readonly>Stock</label>
+                <label for="status" class="col-sm-3 control-label">Contraseña</label>
                 <div class="col-sm-9">
-                    {{ form.stock }}
-                </div>
-            </div> 
-            <div class="form-group">
-                <label for="status" class="col-sm-3 control-label">Denominacion</label>
-                <div class="col-sm-9">
-                    {{ form.denominacion }}
+                    {{ form.password }}
+                    {{ form.password.errors }}
                 </div>
             </div>
-            <div class="form-group">
-                <label for="description" class="col-sm-3 control-label" readonly>Remitente</label>
-                <div class="col-sm-9">
-                    {{ form.target }}
-                </div>
-            </div> 
-                <div class="form-group">
-                <label for="status" class="col-sm-3 control-label">Almacen</label>
-                <div class="col-sm-9">
-                    {{ form.almacen }}
-                </div>
-            </div> 
                     <!-- <div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
                         <div class="col-sm-9">
@@ -53,8 +37,7 @@
                     </div> -->   
             <div class="form-group">
                 <div class="col-sm-12 text-center">
-                    <input type="submit" class="btn btn-success" value="Registrar">
-                    <a class="btn btn-info" href="{% url 'main:home' %}">Volver</a>
+                    <input type="submit" class="btn btn-info" value="Ingresar">
                     <!--    <span class="glyphicon glyphicon-plus"></span> Add
                     </button> -->
                 </div>
